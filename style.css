@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --primary: #1C1917;
-    --secondary: #44403C;
-    --cta: #CA8A04;
-    --bg: #FAFAF9;
-    --text: #0C0A09;
-    --text-muted: #57534E;
+    --primary: #2563EB;
+    --secondary: #3B82F6;
+    --cta: #F97316;
+    --bg: #F8FAFC;
+    --text: #1E293B;
+    --text-muted: #475569;
     --glass: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.3);
     --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.05);
