@@ -89,13 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.top = '0.5rem';
-            navbar.style.height = '60px';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.7)';
-            navbar.style.top = '1.5rem';
-            navbar.style.height = '70px';
+            navbar.classList.remove('scrolled');
         }
     });
 });
