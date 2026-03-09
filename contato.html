@@ -10,33 +10,54 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .contact-form {
-            background: #fff;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 3rem;
-            border-radius: 8px;
-            box-shadow: var(--shadow-premium);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-glass);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-form::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--glass-highlight) 0%, transparent 70%);
+            opacity: 0.5;
         }
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            color: var(--primary);
         }
         .form-control {
             width: 100%;
-            padding: 1rem;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            font-family: 'Jost', sans-serif;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
             transition: var(--transition-fluid);
+            color: var(--text);
         }
         .form-control:focus {
             outline: none;
-            border-color: var(--cta);
+            background: rgba(255, 255, 255, 0.8);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
     </style>
 </head>
@@ -65,10 +86,10 @@
         <a href="contato.html">Contato</a>
     </div>
 
-    <header class="hero" style="min-height: 40vh; padding-top: 150px; background-color: #fff;">
+    <header class="hero subpage">
         <div class="container">
-            <h1 class="reveal active">Contato</h1>
-            <p class="reveal active">Estamos prontos para atender você com exclusividade.</p>
+            <h1 class="reveal">Contato</h1>
+            <p class="reveal">Estamos prontos para atender você com exclusividade.</p>
         </div>
     </header>
 

@@ -7,10 +7,13 @@
     --bg: #F8FAFC;
     --text: #1E293B;
     --text-muted: #475569;
-    --glass: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.3);
-    --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.05);
-    --transition-fluid: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    --glass: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.3);
+    --shadow-premium: 0 20px 60px rgba(0, 0, 0, 0.06);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    --transition-fluid: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-fast: all 0.3s ease;
 }
 
 * {
@@ -65,16 +68,30 @@ h1, h2, h3, h4 {
     max-width: 1100px;
     height: 70px;
     background: var(--glass);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 2.5rem;
     z-index: 1000;
-    box-shadow: var(--shadow-premium);
+    box-shadow: var(--shadow-glass);
     transition: var(--transition-fluid);
+}
+
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(120deg, var(--glass-highlight) 0%, transparent 50%);
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .logo {
@@ -168,9 +185,16 @@ h1, h2, h3, h4 {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 100px;
+    padding-top: 150px;
+    padding-bottom: 80px;
     position: relative;
     overflow: hidden;
+}
+
+.hero.subpage {
+    min-height: 40vh;
+    background-color: #fff;
+    padding-top: 180px;
 }
 
 .hero-content {
@@ -272,44 +296,51 @@ section {
 }
 
 .service-card {
-    background: #fff;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 3rem 2rem;
-    border: 1px solid #f1f1f1;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
     transition: var(--transition-fluid);
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-glass);
 }
 
-.service-card::after {
+.service-card::before {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--cta);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--glass-highlight) 0%, transparent 70%);
+    opacity: 0;
+    transition: var(--transition-fluid);
+    pointer-events: none;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-premium);
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--glass-highlight);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.1);
 }
 
-.service-card:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+.service-card:hover::before {
+    opacity: 0.5;
+    transform: translate(10%, 10%);
 }
 
 .service-card h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
+    color: var(--primary);
 }
 
 .service-card p {
     color: var(--text-muted);
+    font-size: 0.95rem;
 }
 
 /* Differentials */
@@ -364,6 +395,30 @@ section {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+    transition: var(--transition-fast);
+}
+
+.faq-item h4:hover {
+    color: var(--primary);
+}
+
+.faq-item p {
+    max-height: 0;
+    overflow: hidden;
+    transition: var(--transition-fluid);
+    opacity: 0;
+    margin-top: 0;
+}
+
+.faq-item.active p {
+    max-height: 200px; /* Adjust as needed */
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.faq-item.active h4 i {
+    transform: rotate(45deg);
+    color: var(--cta);
 }
 
 /* Footer */
@@ -393,21 +448,38 @@ footer {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     background: #25D366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
     z-index: 1000;
     transition: var(--transition-fluid);
+    text-decoration: none;
+}
+
+.whatsapp-float::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.6); opacity: 0; }
 }
 
 .whatsapp-float:hover {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(10deg);
 }
 
 /* Animations */

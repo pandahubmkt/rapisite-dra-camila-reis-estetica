@@ -65,6 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // FAQ Toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const header = item.querySelector('h4');
+        
+        header.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Optional: close other items
+            faqItems.forEach(i => i.classList.remove('active'));
+            
+            if (!isActive) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+            lucide.createIcons();
+        });
+    });
+
     // Navbar transparency on scroll
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
